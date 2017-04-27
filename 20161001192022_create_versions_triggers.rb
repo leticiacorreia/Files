@@ -394,11 +394,6 @@ class CreateVersionsTriggers < ActiveRecord::Migration
 				
 
 				END IF;
-
-
-				UPDATE questions
-				SET title = 'questão modificada na função questions_versions.'
-				WHERE id = NEW.question_id;
 				
 				RETURN NEW; 
 			END;
@@ -642,32 +637,3 @@ class CreateVersionsTriggers < ActiveRecord::Migration
     SQL
   end
 end
-
-
-# def last_answers
-  #   execute <<-SQL
-  #   	CREATE OR REPLACE FUNCTION last_answers()
-		#   RETURNS trigger AS
-		# $BODY$
-		# 	DECLARE 	
-		# 		current_lo INTEGER;
-		# 	BEGIN
-					
-		# 		RETURN NEW; 
-		# 	END;
-		# $BODY$
-		#   LANGUAGE plpgsql VOLATILE
-		#   COST 100;
-		# ALTER FUNCTION last_answers()
-		#   OWNER TO postgres;
-
-	
-
-		# -- Trigger: on answers
-		# CREATE TRIGGER last_answers
-		#   BEFORE INSERT
-		#   ON answers
-		#   FOR EACH ROW
-		# 	  EXECUTE PROCEDURE last_answers();
-  #   SQL
-  # end
