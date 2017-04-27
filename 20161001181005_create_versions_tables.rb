@@ -14,14 +14,14 @@ class CreateVersionsTables < ActiveRecord::Migration
         t.column :created_at, :datetime
     end
 
-	create_table :introductions_versions do |t|
-		t.string :title
-		t.text :content
-		t.integer :position
-		t.integer :lo_id, index: true, foreign_key: true
-		t.references :introduction, foreign_key: true
-		t.column :created_at, :datetime
-	end 
+    create_table :introductions_versions do |t|
+	t.string :title
+	t.text :content
+	t.integer :position
+	t.integer :lo_id, index: true, foreign_key: true
+	t.references :introduction, foreign_key: true
+	t.column :created_at, :datetime
+    end 
 
     create_table :exercises_versions do |t|
         t.string :title
