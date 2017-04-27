@@ -52,11 +52,11 @@ class CreateVersionsTables < ActiveRecord::Migration
         t.integer :tip_id, index: true, foreign_key: true
     end
 
-	add_reference :answers, :los_version, foreign_key: true
+    add_reference :answers, :los_version, foreign_key: true
     add_reference :answers, :exercises_version, foreign_key: true
     add_reference :answers, :questions_version, foreign_key: true
 
-	add_column :answers, :introductions_versions, :integer, array: true, default: []
+    add_column :answers, :introductions_versions, :integer, array: true, default: []
     add_column :answers, :exercises_versions, :integer, array: true, default: []
     add_column :answers, :last_answers, :integer, array: true, default: []
     
@@ -65,7 +65,7 @@ class CreateVersionsTables < ActiveRecord::Migration
     add_column :questions_versions, :tips_versions, :integer, array: true, default: []
 
     add_column :los, :modified, :boolean
-	add_column :introductions, :modified, :boolean
+    add_column :introductions, :modified, :boolean
     add_column :exercises, :modified, :boolean
     add_column :questions, :modified, :boolean
     add_column :tips, :modified, :boolean
