@@ -196,14 +196,6 @@ class CreateVersionsTriggers < ActiveRecord::Migration
 					FROM exercises
 					WHERE current_lo = lo_id);
 				
-					array_exercises_versions = array(
-						SELECT DISTINCT ON (exercise_id) id 
-						FROM exercises_versions 
-						WHERE lo_id = current_lo 
-						ORDER BY exercise_id, id DESC);
-
-					NEW.exercises_versions = array_exercises_versions;
-
 			    ELSE
 					array_exercises_modified =  array(
 						SELECT id 
@@ -235,10 +227,17 @@ class CreateVersionsTriggers < ActiveRecord::Migration
 					UPDATE exercises 
 					SET modified = false 
 					WHERE id = ANY(array_exercises_modified);
-
-					NEW.exercises_versions = array_exercises_versions;
 					
 				END IF;
+
+				array_exercises_versions = array(
+					SELECT DISTINCT ON (exercise_id) id 
+					FROM exercises_versions 
+					WHERE lo_id = current_lo 
+					ORDER BY exercise_id, id DESC
+				);
+
+				NEW.exercises_versions = array_exercises_versions;
 
 				RETURN NEW; 
 			END;
