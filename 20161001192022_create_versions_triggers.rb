@@ -197,6 +197,7 @@ class CreateVersionsTriggers < ActiveRecord::Migration
 					WHERE current_lo = lo_id);
 				
 			    ELSE
+					
 					array_exercises_modified =  array(
 						SELECT id 
 						FROM exercises
@@ -215,6 +216,8 @@ class CreateVersionsTriggers < ActiveRecord::Migration
 						FROM exercises_versions 
 						WHERE exercise_id = ANY(array_exercises_modified) 
 						ORDER BY exercise_id, id DESC);
+					--acima, ao inves de comparacao com array, pode-se fazer join com exercises, filtrando
+					-- pelo modified true e lo_id.
 
 					UPDATE exercises_versions as ex 
 					SET questions_versions = array(
